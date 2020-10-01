@@ -48,7 +48,6 @@ or
 ```
 def permuteUnique(self, nums):
     res = []
-    nums.sort()
     self.dfs(nums, [], res)
     return res
     
