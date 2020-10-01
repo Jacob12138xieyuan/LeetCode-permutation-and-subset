@@ -1,19 +1,33 @@
 # LeetCode-permutation-and-subset
 
+
+## combination
+```
+class Solution(object):
+    def combine(self, n, k):
+        self.result = []
+        nums = [i+1 for i in range(n)]
+        self.backTrack(nums, k, [], 0)
+        return self.result
+    
+    def backTrack(self, nums, k, array, index):
+        if len(array) == k:
+            self.result.append(array)
+            return
+        for i in range(index, len(nums)): # backTrack(...[1]...) backTrack(...[2]...) backTrack(...[3]...) backTrack(...[4]...)
+            self.backTrack(nums, k, array+[nums[i]], i+1)
+            
+    # [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+```
+
 ## permutation
 ```
 class Solution(object):
     def permute(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
         # choose, explore, un-choose
-        if len(nums) <= 1:
-            return [nums]
         self.result = []
         used = [0]*len(nums) # 
-        self.backTrack(nums, [], used)
+        self.backTrack(nums, [], used) # need to choose element before current also
         return self.result
         
     def backTrack(self, nums, array, used):
